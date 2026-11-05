@@ -1,55 +1,38 @@
-program KelulusanMahasiswaArray;
+program DeretFibonacci;
 uses crt;
 
+procedure tampilkanFibonacci(n: integer);
 var
-  nilaiKomponen : array[1..5, 1..4] of real;
-  rataRata : array[1..5] of real;
-  status : array[1..5] of string;
-  
-  n, i : integer;
-
+    i: integer;
+    f1, f2, f3: integer;
 begin
-  clrscr;
-  writeln('Program Hitung Kelulusan');
-  
-  repeat
-    write('Masukkan jumlah mahasiswa (1-5): '); readln(n);
-  until (n >= 1) and (n <= 5);
-  
-  writeln;
-  
-  for i := 1 to n do
-  begin
-    writeln('Masukkan nilai untuk mahasiswa ke-', i, ':');
-    write('  Nilai Tugas : ');
-     readln(nilaiKomponen[i, 1]);
-    write('  Nilai Kuis  : ');
-     readln(nilaiKomponen[i, 2]);
-    write('  Nilai UTS   : ');
-     readln(nilaiKomponen[i, 3]);
-    write('  Nilai UAS   : ');
-     readln(nilaiKomponen[i, 4]);
+    f1 := 1;
+    f2 := 1;
     
-    rataRata[i] := (nilaiKomponen[i, 1] + nilaiKomponen[i, 2] + nilaiKomponen[i, 3] + nilaiKomponen[i, 4]) / 4;
-    
-    if rataRata[i] >= 70 then
-      status[i] := 'LULUS'
-    else
-      status[i] := 'TIDAK LULUS';
-    writeln;
-  end;
-  
-  writeln('No  Tugas   Kuis    UTS     UAS     Rata-rata   Keterangan');
-  for i := 1 to n do
-  begin
-    writeln(i:2, 
-            nilaiKomponen[i, 1]:8:1, 
-            nilaiKomponen[i, 2]:8:1, 
-            nilaiKomponen[i, 3]:8:1, 
-            nilaiKomponen[i, 4]:8:1, 
-            rataRata[i]:12:1, 
-            '   ', status[i]);
-  end;
-  
-  readln;
+ write('Output -> Deret Fibonacci : ');
+ for i := 1 to n do
+begin
+if i = 1 then
+ write(f1, ' ')
+else if i = 2 then
+ write(f2, ' ')
+else
+begin
+ f3 := f1 + f2;
+write(f3, ' ');
+ f1 := f2;
+ f2 := f3;
+end;
+end;
+ writeln;
+end;
+
+var
+    nilai: integer;
+begin
+    clrscr;
+    write('Input -> Nilai : '); 
+    readln(nilai);
+    tampilkanFibonacci(nilai);
+    readln;
 end.
