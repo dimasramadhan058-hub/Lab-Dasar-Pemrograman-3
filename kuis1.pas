@@ -1,20 +1,48 @@
-program FaktorialRekursif;
+program HargaMakananPointer;
 uses crt;
 
-function faktorial(n: integer): longint;
-begin
-    if (n = 0) or (n = 1) then
-        faktorial := 1
-    else
-        faktorial := n * faktorial(n - 1);
-end;
+type
+  TMakanan = record
+    nama: string[50];
+    harga: longint;
+  end;
+  PMakanan = ^TMakanan;
 
 var
-    nilai: integer;
+  daftar: array[1..100] of TMakanan;
+  pTermahal, pTermurah: PMakanan;
+  n, i: integer;
+
 begin
-    clrscr;
-    write('Input  Nilai : '); 
-    readln(nilai);
-    writeln('Output -> Hasil : ', faktorial(nilai));
-    readln;
+  clrscr;
+  write('Masukkan jumlah data makanan: ');
+  readln(n);
+  writeln;
+
+  for i := 1 to n do
+  begin
+    writeln('Data Makanan ke-', i);
+    write('  Nama Makanan  : '); 
+    readln(daftar[i].nama);
+    write('  Harga Makanan : Rp'); 
+    readln(daftar[i].harga);
+    writeln;
+  end;
+
+  pTermahal := @daftar[1];
+  pTermurah := @daftar[1];
+
+  for i := 2 to n do
+  begin
+    if daftar[i].harga > pTermahal^.harga then
+      pTermahal := @daftar[i];
+
+    if daftar[i].harga < pTermurah^.harga then
+      pTermurah := @daftar[i];
+      end;
+
+  writeln('HASIL PENCARIAN');
+  writeln('a. Makanan Termahal : ', pTermahal^.nama, ' (Rp', pTermahal^.harga, ')');
+  writeln('b. Makanan Termurah : ', pTermurah^.nama, ' (Rp', pTermurah^.harga, ')');
+  readln;
 end.

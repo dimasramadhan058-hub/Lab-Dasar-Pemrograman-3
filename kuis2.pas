@@ -1,38 +1,21 @@
-program CekPrima;
-uses crt;
-
-function isPrima(n: integer): boolean;
-var
-    i: integer;
-    prima: boolean;
-begin
-if n <= 1 then
- prima := false
-begin
- prima := true;
-for i := 2 to trunc(sqrt(n)) do
-begin
-if n mod i = 0 then
-begin
- prima := false;
- break;
-end;
-end;
-end;
-    isPrima := prima;
-end;
+program DuaPointerSatuVariabel;
+uses crt, sysutils;
 
 var
-    angka: integer;
+  angka: integer;
+  pointer1, pointer2: ^integer;
+
 begin
-    clrscr;
-    write('Input -> Angka : '); 
-    readln(angka);
-    
-    write('Output -> ');
-    if isPrima(angka) then
-        writeln('Prima')
-    else
-        writeln('Non-Prima');
-    readln;
+  clrscr;
+  angka := 100;
+
+  pointer1 := @angka;
+  pointer2 := @angka;
+
+  writeln('a. Nilai variabel               : ', angka);
+  writeln('b. Alamat variabel              : ', IntToHex(PtrUInt(@angka), 8));
+  writeln('c. Nilai yang ditunjuk pointer1 : ', pointer1^);
+  writeln('  Nilai yang ditunjuk pointer2 : ', pointer2^);
+  
+  readln;
 end.
